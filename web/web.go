@@ -579,3 +579,13 @@ func fallbackToLocalhost(listen string) string {
 	// IPv6 回退 IPv6 回环
 	return "::1"
 }
+func InitRouter() *gin.Engine {
+    r := gin.Default()
+
+    // 原有路由注册...
+    // registerUserRoutes(r) 之类的
+
+    registerAdvancedConfigRoutes(r) // ← 加这一行
+
+    return r
+}
