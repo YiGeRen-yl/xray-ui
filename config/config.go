@@ -63,3 +63,8 @@ func GetDBFolderPath() string {
 func GetDBPath() string {
 	return fmt.Sprintf("/etc/%s/%s.db", GetName(), GetName())
 }
+conf := &xray.Config{
+    // ...
+    InboundConfigs: allInbounds,
+    // 可能有一些默认的 OutboundConfigs / RouterConfig / DNSConfig
+}
