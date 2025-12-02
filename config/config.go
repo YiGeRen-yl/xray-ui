@@ -63,8 +63,26 @@ func GetDBFolderPath() string {
 func GetDBPath() string {
 	return fmt.Sprintf("/etc/%s/%s.db", GetName(), GetName())
 }
-conf := &xray.Config{
+
+import (
     // ...
-    InboundConfigs: allInbounds,
-    // 可能有一些默认的 OutboundConfigs / RouterConfig / DNSConfig
+    confign "github.com/YiGeRen-yl/xray-ui/config"
+)
+
+// ...
+
+adv, err := confign.GetAdvancedConfig()
+if err != nil {
+    return nil, err
+}
+if adv != nil {
+    if len(adv.Outbounds) != 0 {
+        conf.OutboundConfigs = adv.Outbounds
+    }
+    if len(adv.Routing) != 0 {
+        conf.RouterConfig = adv.Routing
+    }
+    if len(adv.DNS) != 0 {
+        conf.DNSConfig = adv.DNS
+    }
 }
